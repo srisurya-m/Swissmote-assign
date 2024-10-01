@@ -1,0 +1,260 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  user-select: none;
+  background-image: url("../assets/background.jpg");
+  background-repeat: repeat-y;
+  overflow-x: hidden;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+$color1: white;
+$color2: rgb(46, 46, 46);
+$color3: rgb(212, 215, 55);
+
+.red {
+  color: red;
+}
+.purple {
+  color: rgb(47, 0, 255);
+}
+.green {
+  color: rgb(0, 195, 0);
+}
+
+@import "mixin";
+@import "mediaqueries";
+@import "home";
+@import "tasks";
+@import "taskcard";
+@import "createtask";
+@import "updatetask";
+
+.header.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.header {
+  transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(-100%);
+  opacity: 0;
+  @include flex(row, flex-end, stretch, 1.2rem);
+  background-color: #514d5e;
+  width: 100%;
+  height: 3rem;
+  margin: 0 auto;
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  box-sizing: border-box;
+
+  .title {
+    color: #dbc066;
+    width: 45rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .greeting {
+    color: white; // Greeting text color
+    width: 50rem;
+    font-size: 1.2rem; // Adjust size as needed
+  }
+
+  .big-screen-profile-icon {
+    color: white;
+    margin-bottom: 8px;
+    @include breakpoint(1024px) {
+      display: none;
+    }
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .profile-icon {
+    img {
+      margin-top: 4px;
+      max-width: 50px;
+      max-height: 40px;
+      border-radius: 90px;
+      margin-bottom: 4px;
+    }
+    &:hover {
+      cursor: pointer;
+    }
+    margin-top: 4px;
+    border-radius: 90px;
+    margin-bottom: 4px;
+  }
+
+  a {
+    color: $color1;
+    letter-spacing: 2px;
+    font-size: 1.2rem;
+
+    &:hover {
+      color: $color3;
+    }
+  }
+
+  .logo {
+    width: 68px;
+    height: 65px;
+    position: relative;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: scale(0.8);
+    }
+  }
+
+  .options {
+    display: flex;
+    justify-content: flex-end;
+    width: 75%;
+    height: 100%;
+    margin-top: 10px;
+
+    button {
+      border: 1px solid #fff;
+      color: $color1;
+      padding: 8px 15px;
+      border-radius: 4px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      background-color: transparent;
+
+      &:hover {
+        color: $color1;
+        background-color: $color3;
+      }
+    }
+  }
+
+  .hamburg {
+    &:hover {
+      cursor: pointer;
+      color: #fff;
+    }
+    @include hamburg(1030px) {
+      display: none;
+    }
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: auto;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    background-color: white;
+    height: 100vh;
+    width: 40%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    z-index: 1000;
+    overflow-y: auto;
+
+    @include breakpoint(1024px) {
+      width: 60%;
+    }
+  }
+
+  .logout {
+    background-color: #835eda;
+    color: white;
+    width: 7rem;
+    font-size: 1rem;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    z-index: 1;
+
+    &:hover {
+      background-color: #4e17cc;
+      transform: scale(1.05);
+    }
+
+    &:active {
+      background-color: #3c13a3;
+      transform: scale(0.95);
+    }
+  }
+
+  .cross {
+    &:hover {
+      cursor: pointer;
+    }
+    width: 100%;
+    display: flex;
+    justify-content: end;
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(2px);
+    z-index: 900;
+    pointer-events: none;
+  }
+}
+
+.skeleton-loader {
+  display: flex;
+  flex-direction: column;
+  margin-top: 80px;
+}
+
+.skeleton-shape {
+  height: 20px;
+  width: 100%;
+  background-color: #ddd;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  animation: skeleon-loading 1.5s infinite;
+}
+
+@keyframes skeleon-loading {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}

@@ -1,0 +1,11 @@
+@mixin breakpoint($bp: 0) {
+  @media (max-width: $bp) {
+    @content;
+  }
+}
+
+@mixin hamburg($bp: 0) {
+  @media (min-width: $bp) {
+    @content;
+  }
+}
