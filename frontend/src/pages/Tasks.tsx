@@ -137,7 +137,11 @@ const Tasks = () => {
           { status: "inProgress" }
         );
         toast.success("Task marked as in progress");
-        fetchTasks();
+        if (user?.role == "admin") {
+          fetchAllTasks();
+        } else {
+          fetchTasks();
+        }
       } else if (status === "inProgress") {
         await axios.put(
           `${import.meta.env.VITE_SERVER}/api/v1/task/update/${taskId}`,
